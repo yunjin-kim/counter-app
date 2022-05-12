@@ -6,14 +6,19 @@ import ButtonGroup from './ButtonGroup';
 import ShowCount from './ShowCount';
 import InputRange from './InputRange';
 
-function App({ store }) {
-	const { count, diff } = store.getState();
+import useSelector from './useSelector';
+import useDispatch from './useDispatch';
 
-	const onIncrement = () => store.dispatch(increment());
-	const onDecrement = () => store.dispatch(decrement());
-	const onReset = () => store.dispatch(reset());
+function App() {
+	const count = useSelector((state) => state.count);
+	const diff = useSelector((state) => state.diff);
+	const dispatch = useDispatch();
 
-	const handleDiff = ({ target }) => store.dispatch(setDiff(target.valueAsNumber));
+	const onIncrement = () => dispatch(increment());
+	const onDecrement = () => dispatch(decrement());
+	const onReset = () => dispatch(reset());
+
+	const handleDiff = ({ target }) => dispatch(setDiff(target.valueAsNumber));
 
 	return (
 		<div className="App">
